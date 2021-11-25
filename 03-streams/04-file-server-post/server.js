@@ -46,12 +46,12 @@ server.on('request', (req, res) => {
 
           // завершение соединения
           req.on('close', () => {
-            limitedStream.destroy();
-            outStream.destroy();
-
             // удаляем файл если обрыв
             if (!req.complete) {
-              removeFile(filepath)
+              limitedStream.destroy();
+              outStream.destroy();
+
+              removeFile(filepath);
             }
           });
 
